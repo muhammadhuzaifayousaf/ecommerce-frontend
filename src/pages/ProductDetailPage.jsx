@@ -1,0 +1,336 @@
+import { useState } from 'react'
+import { Link, useParams, useNavigate } from 'react-router-dom'
+import { Heart, ShoppingCart, Star, Shield, Globe, ChevronLeft } from 'lucide-react'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+import StarRating from '../components/StarRating'
+import { products, initialCartItems } from '../data/products'
+import { img, formatPrice } from '../utils/helpers'
+
+// Price tier table from the Figma design
+const priceTiers = [
+  { range: '50-100 pcs',  price: 98.00 },
+  { range: '100-700 pcs', price: 90.00 },
+  { range: '700+ pcs',    price: 78.00 },
+]
+
+// "You may like" sidebar items (static data matching design)
+const youMayLike = [
+  { name: 'Men Blazers Sets Elegant Formal', price: '$7.00 - $99.50',  image: 'tshirt.jpg' },
+  { name: 'Men Shirt Sleeve Polo Contrast',  price: '$7.00 - $99.50',  image: 'tshirt.jpg' },
+  { name: 'Apple Watch Series Space Gray',   price: '$7.00 - $99.50',  image: 'smartwatch.jpg' },
+  { name: 'Basketball Crew Socks Long Stuff',price: '$7.00 - $99.50',  image: 'tshirt.jpg' },
+  { name: "New Summer Men's castrol T-Shirts", price: '$7.00 - $99.50', image: 'backpack.jpg' },
+]
+
+export default function ProductDetailPage() {
+  const { id }     = useParams()
+  const navigate   = useNavigate()
+  const product    = products.find((p) => p.id === Number(id)) || products[0]
+
+  const [activeImg,     setActiveImg]     = useState(0)
+  const [activeTab,     setActiveTab]     = useState('description')
+  const [wishlisted,    setWishlisted]    = useState(false)
+  const [qty,           setQty]           = useState(1)
+
+  // Thumbnail images — use the same image for all (user replaces with actual thumbnails)
+  const thumbImages = Array(6).fill(product.image)
+
+  const tabs = ['description', 'reviews', 'shipping', 'about seller']
+
+  return (
+    <div className="min-h-screen bg-bg-light">
+      <Navbar cartCount={initialCartItems.length} />
+
+      {/* Breadcrumb */}
+      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-1 text-sm text-text-muted flex-wrap">
+        <Link to="/"         className="hover:text-primary">Home</Link>
+        <span>›</span>
+        <Link to="/products" className="hover:text-primary">Clothings</Link>
+        <span>›</span>
+        <Link to="/products" className="hover:text-primary">Men's wear</Link>
+        <span>›</span>
+        <span className="text-text-primary">Summer clothing</span>
+      </div>
+
+      <main className="max-w-7xl mx-auto px-4 pb-10 space-y-5">
+
+        {/* ── Top Product Section ── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+          {/* Image gallery */}
+          <div className="bg-white rounded border border-border-col p-4">
+            {/* Main image */}
+            <div className="aspect-square bg-bg-light rounded flex items-center justify-center overflow-hidden mb-3">
+              <img
+                src={img(thumbImages[activeImg])}
+                alt={product.name}
+                className="object-contain w-full h-full p-4"
+                onError={(e) => { e.target.src = `https://placehold.co/400x400/f7f7f7/999?text=Product` }}
+              />
+            </div>
+            {/* Thumbnails */}
+            <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+              {thumbImages.map((src, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveImg(i)}
+                  className={`flex-shrink-0 w-14 h-14 rounded border-2 overflow-hidden transition-colors ${
+                    i === activeImg ? 'border-primary' : 'border-border-col hover:border-primary/50'
+                  }`}
+                >
+                  <img
+                    src={img(src)}
+                    alt={`View ${i + 1}`}
+                    className="object-contain w-full h-full p-1"
+                    onError={(e) => { e.target.src = `https://placehold.co/56x56/f7f7f7/999?text=` }}
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Product Info */}
+          <div className="bg-white rounded border border-border-col p-5">
+            {/* Stock */}
+            <span className="inline-flex items-center gap-1 text-success text-sm font-medium mb-2">
+              ✓ In stock
+            </span>
+
+            {/* Title */}
+            <h1 className="text-lg font-bold text-text-primary leading-snug mb-2">
+              {product.name}
+            </h1>
+
+            {/* Rating row */}
+            <div className="flex items-center gap-3 text-sm text-text-muted mb-4">
+              <StarRating rating={product.rating} size="md" />
+              <span className="font-medium">{product.rating}</span>
+              <span className="flex items-center gap-1">
+                💬 {32} reviews
+              </span>
+              <span className="flex items-center gap-1">
+                🛒 {product.orders} sold
+              </span>
+            </div>
+
+            {/* Price tiers */}
+            <div className="grid grid-cols-3 gap-0 mb-5 border border-border-col rounded overflow-hidden">
+              {priceTiers.map((tier, i) => (
+                <div
+                  key={i}
+                  className={`p-2 text-center border-r last:border-r-0 border-border-col ${
+                    i === 0 ? 'bg-orange-50' : ''
+                  }`}
+                >
+                  <div className={`font-bold text-sm ${i === 0 ? 'text-danger' : 'text-text-primary'}`}>
+                    ${tier.price.toFixed(2)}
+                  </div>
+                  <div className="text-xs text-text-muted">{tier.range}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Specs table */}
+            <table className="w-full text-sm mb-4">
+              <tbody>
+                {[
+                  ['Price',         'Negotiable'],
+                  ['Type',          'Classic shoes'],
+                  ['Material',      'Plastic material'],
+                  ['Design',        'Modern nice'],
+                  ['Customization', 'Customized logo and design custom packages'],
+                  ['Protection',    'Refund Policy'],
+                  ['Warranty',      '2 years full warranty'],
+                ].map(([key, val]) => (
+                  <tr key={key} className="border-b border-border-col last:border-0">
+                    <td className="py-2 pr-4 text-text-muted w-32">{key}</td>
+                    <td className="py-2 text-text-secondary">{val}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Supplier card */}
+          <div className="bg-white rounded border border-border-col p-5 h-fit">
+            <div className="flex items-start gap-3 mb-3">
+              <div className="w-10 h-10 bg-primary rounded flex items-center justify-center text-white font-bold text-lg">
+                G
+              </div>
+              <div>
+                <p className="font-semibold text-text-primary text-sm">Guanjoi Trading LLC</p>
+                <div className="flex items-center gap-1 text-sm text-text-muted mt-1">
+                  🇩🇪 <span>Germany, Berlin</span>
+                </div>
+              </div>
+            </div>
+            <div className="space-y-1.5 mb-4 text-sm">
+              <div className="flex items-center gap-2 text-text-secondary">
+                <Shield size={14} className="text-success" /> Verified Seller
+              </div>
+              <div className="flex items-center gap-2 text-text-secondary">
+                <Globe size={14} className="text-primary" /> Worldwide shipping
+              </div>
+            </div>
+            <div className="space-y-2">
+              <button className="btn-primary w-full">Send inquiry</button>
+              <button className="btn-outline w-full">Seller's profile</button>
+            </div>
+            <button
+              onClick={() => setWishlisted(!wishlisted)}
+              className={`w-full mt-3 flex items-center justify-center gap-2 text-sm py-2 rounded border transition-colors ${
+                wishlisted
+                  ? 'border-danger text-danger bg-red-50'
+                  : 'border-border-col text-text-secondary hover:border-primary hover:text-primary'
+              }`}
+            >
+              <Heart size={14} className={wishlisted ? 'fill-danger' : ''} />
+              {wishlisted ? 'Saved' : 'Save for later'}
+            </button>
+          </div>
+        </div>
+
+        {/* ── Description + You may like ── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* Description tabs */}
+          <div className="md:col-span-2 bg-white rounded border border-border-col overflow-hidden">
+            {/* Tab nav */}
+            <div className="flex border-b border-border-col">
+              {tabs.map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-5 py-3 text-sm font-medium capitalize transition-colors ${
+                    activeTab === tab
+                      ? 'text-primary border-b-2 border-primary -mb-px bg-white'
+                      : 'text-text-muted hover:text-text-primary'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+
+            <div className="p-5">
+              {activeTab === 'description' && (
+                <div className="space-y-4">
+                  <p className="text-sm text-text-secondary leading-relaxed">
+                    {product.description}
+                  </p>
+                  <p className="text-sm text-text-secondary leading-relaxed">
+                    Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur.
+                  </p>
+
+                  {/* Specs table */}
+                  {product.specs && (
+                    <table className="w-full border border-border-col rounded text-sm overflow-hidden">
+                      <tbody>
+                        {Object.entries(product.specs).map(([k, v]) => (
+                          <tr key={k} className="border-b border-border-col last:border-0">
+                            <td className="px-4 py-2 bg-bg-light font-medium text-text-primary w-40">{k}</td>
+                            <td className="px-4 py-2 text-text-secondary">{v}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
+
+                  {/* Features list */}
+                  {product.features && (
+                    <ul className="space-y-1.5">
+                      {product.features.map((f, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm text-text-secondary">
+                          <span className="text-success mt-0.5">✓</span> {f}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
+              {activeTab === 'reviews' && (
+                <div className="text-sm text-text-muted py-6 text-center">
+                  <Star size={32} className="mx-auto mb-2 text-yellow-400" />
+                  <p>32 customer reviews — average rating {product.rating}/10</p>
+                </div>
+              )}
+              {activeTab === 'shipping' && (
+                <p className="text-sm text-text-secondary">Free worldwide shipping on orders over $50.</p>
+              )}
+              {activeTab === 'about seller' && (
+                <p className="text-sm text-text-secondary">
+                  Guanjoi Trading LLC — verified seller based in Germany, Berlin. Worldwide shipping with 2-year warranty.
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* You may like */}
+          <div className="bg-white rounded border border-border-col p-4 h-fit">
+            <h3 className="font-semibold text-text-primary mb-3 text-sm">You may like</h3>
+            <ul className="space-y-3">
+              {youMayLike.map((item, i) => (
+                <li key={i} className="flex gap-3 hover:bg-bg-light rounded p-1 cursor-pointer transition-colors">
+                  <div className="w-12 h-12 bg-bg-light rounded flex-shrink-0 overflow-hidden flex items-center justify-center">
+                    <img
+                      src={img(item.image)}
+                      alt={item.name}
+                      className="object-contain w-full h-full p-1"
+                      onError={(e) => { e.target.src = `https://placehold.co/48x48/f7f7f7/999?text=` }}
+                    />
+                  </div>
+                  <div>
+                    <p className="text-xs text-text-secondary leading-snug line-clamp-2">{item.name}</p>
+                    <p className="text-xs font-medium text-text-primary mt-0.5">{item.price}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* ── Related Products ── */}
+        <div className="bg-white rounded border border-border-col p-5">
+          <h2 className="font-bold text-text-primary mb-4">Related products</h2>
+          <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
+            {products.slice(0, 6).map((p) => (
+              <Link
+                key={p.id}
+                to={`/products/${p.id}`}
+                className="flex-shrink-0 w-40 group"
+              >
+                <div className="h-32 bg-bg-light rounded flex items-center justify-center overflow-hidden mb-2">
+                  <img
+                    src={img(p.image)}
+                    alt={p.name}
+                    className="object-contain w-full h-full p-3 group-hover:scale-105 transition-transform"
+                    onError={(e) => { e.target.src = `https://placehold.co/160x128/f7f7f7/999?text=Image` }}
+                  />
+                </div>
+                <p className="text-xs text-text-secondary line-clamp-2 leading-snug">{p.name}</p>
+                <p className="text-xs font-semibold text-text-primary mt-1">
+                  {formatPrice(p.price)} – {formatPrice((p.originalPrice || p.price * 1.5))}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Promo Banner ── */}
+        <div className="bg-gradient-to-r from-primary to-blue-700 rounded-lg p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="text-white">
+            <h3 className="text-lg md:text-xl font-bold">Super discount on more than 100 USD</h3>
+            <p className="text-sm opacity-80 mt-1">Have you ever finally just write dummy info</p>
+          </div>
+          <button className="bg-warning text-white px-6 py-2.5 rounded font-semibold text-sm hover:opacity-90 transition-opacity whitespace-nowrap">
+            Shop now
+          </button>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  )
+}

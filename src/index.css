@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", system-ui, -apple-system, sans-serif;
+    background-color: #f7f7f7;
+    color: #1c1c1c;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+@layer components {
+  /* Custom scrollbar */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Rating stars */
+  .star-filled {
+    color: #ff9017;
+  }
+  .star-empty {
+    color: #d9d9d9;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply bg-primary text-white px-4 py-2 rounded text-sm font-medium hover:bg-primary-dark transition-colors;
+  }
+  .btn-success {
+    @apply bg-success text-white px-4 py-2 rounded text-sm font-medium hover:opacity-90 transition-opacity;
+  }
+  .btn-outline {
+    @apply border border-primary text-primary px-4 py-2 rounded text-sm font-medium hover:bg-primary-light transition-colors;
+  }
+
+  /* Card */
+  .product-card {
+    @apply bg-white rounded border border-border-col shadow-card hover:shadow-card-hover transition-shadow cursor-pointer;
+  }
+}
+
+/* Horizontal scroll for mobile categories */
+.overflow-x-scroll {
+  -webkit-overflow-scrolling: touch;
+}
