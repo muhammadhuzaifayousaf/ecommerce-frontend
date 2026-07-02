@@ -1,16 +1,82 @@
-# React + Vite
+# 🛒 React eCommerce Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and fully responsive **eCommerce web application** built with **React**, **Vite**, and **Tailwind CSS**. The project recreates a professional online shopping experience with a clean UI, reusable components, product browsing, shopping cart functionality, and responsive layouts optimized for desktop, tablet, and mobile devices.
 
-Currently, two official plugins are available:
+<p align="center">
+  <a href="https://muhammadhuzaifayousaf.github.io/ecommerce-frontend/">
+    <img src="https://github.com/user-attachments/assets/407bfa8a-d4b2-4698-aef0-e815a0e5be11" alt="React eCommerce Frontend Preview" width="100%">
+  </a>
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Live Demo
 
-## React Compiler
+🔗 **https://muhammadhuzaifayousaf.github.io/ecommerce-frontend/**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📖 Project Documentation
 
-## Expanding the ESLint configuration
+📄 **https://drive.google.com/file/d/1g6lAi9o9RGVqysEF54cbjk7uEjh9v9Pd/**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+* Modern and responsive eCommerce user interface
+* Responsive navigation bar with category dropdowns
+* Hero banner with promotional sections
+* Product listing page with multiple products
+* Product details page with image gallery
+* Shopping cart with quantity management
+* Save for later (wishlist) functionality
+* Product search and category filtering
+* Deals and offers section with live countdown timer
+* Home & Outdoor and Consumer Electronics sections
+* Supplier inquiry banner with contact form
+* Regional suppliers section with country flags
+* Mobile friendly design using Tailwind CSS
+* Client side routing with React Router
+* Reusable React components for better maintainability
+
+## 📄 Pages
+
+| Page | Route |
+|------|-------|
+| Home | `/` |
+| Product Listing | `/products` |
+| Product Details | `/products/:id` |
+| Shopping Cart | `/cart` |
+
+## 🛠️ Tech Stack
+
+* **React 18**
+* **Vite**
+* **Tailwind CSS**
+* **React Router DOM**
+* **Lucide React**
+* **React World Flags**
+* **GitHub Pages**
+
+## ⚙️ Installation
+
+```bash
+git clone https://github.com/muhammadhuzaifayousaf/ecommerce-frontend.git
+
+cd ecommerce-frontend
+
+npm install
+
+npm run dev
+```
+
+## 👨‍💻 Author
+
+**Muhammad Huzaifa Yousaf**
+
+GitHub: https://github.com/muhammadhuzaifayousaf
+
+LinkedIn: https://www.linkedin.com/in/muhammad-huzaifa-yousaf/
+
+## 📄 License
+
+This project was developed for learning and educational purposes.
+
+## ⭐ Support
+
+If you found this project helpful, consider giving it a ⭐ on GitHub.
