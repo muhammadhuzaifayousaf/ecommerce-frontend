@@ -115,7 +115,9 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-border-col">
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-2">
-          <p className="text-xs text-text-muted">© 2023 Ecommerce.</p>
+          <p className="text-xs text-text-muted">
+            © {new Date().getFullYear()} Ecommerce.
+          </p>
           <button className="text-xs text-text-muted flex items-center gap-1 hover:text-primary">
   <img
   src="https://flagcdn.com/w20/us.png"
