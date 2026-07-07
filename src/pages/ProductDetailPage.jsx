@@ -93,9 +93,13 @@ export default function ProductDetailPage() {
           {/* Product Info */}
           <div className="bg-white rounded border border-border-col p-5">
             {/* Stock */}
-            <span className="inline-flex items-center gap-1 text-success text-sm font-medium mb-2">
-              ✓ In stock
-            </span>
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              <span className={`inline-flex items-center gap-1 text-sm font-medium ${product.stock > 0 ? 'text-success' : 'text-danger'}`}>
+                {product.stock > 0 ? '✓ In stock' : '✕ Out of stock'}
+              </span>
+              <span className="text-sm text-text-muted">•</span>
+              <span className="text-sm text-text-muted">Category: {product.category}</span>
+            </div>
 
             {/* Title */}
             <h1 className="text-lg font-bold text-text-primary leading-snug mb-2">
@@ -112,6 +116,11 @@ export default function ProductDetailPage() {
               <span className="flex items-center gap-1">
                 🛒 {product.orders} sold
               </span>
+            </div>
+
+            <div className="mb-4">
+              <div className="text-2xl font-bold text-text-primary">{formatPrice(product.price)}</div>
+              <p className="text-sm text-text-secondary mt-2">{product.description}</p>
             </div>
 
             {/* Price tiers */}

@@ -7,7 +7,7 @@ import CountdownTimer from '../components/CountdownTimer'
 import {
   heroCategories, dealProducts, homeOutdoorCategories,
   electronicsCategories, recommendedProducts, suppliersRegion,
-  initialCartItems,
+  initialCartItems, products,
 } from '../data/products'
 import { img, formatPrice } from '../utils/helpers'
 import Flag from "react-world-flags";
@@ -50,6 +50,7 @@ function SectionHeader({ title, subtitle, action }) {
 // ── Home Page ─────────────────────────────────────────────────────────────────
 export default function HomePage() {
   const [cartCount] = useState(initialCartItems.length)
+  const [featuredProducts] = useState(() => products.slice(0, 6))
 
   return (
     <div className="min-h-screen bg-bg-light">
@@ -327,6 +328,40 @@ export default function HomePage() {
 
   </div>
 </section>
+
+        {/* ── Featured Products ── */}
+        <section className="bg-white rounded border border-border-col p-5">
+          <SectionHeader
+            title="Featured products"
+            subtitle="Fresh picks from the local catalog"
+            action={
+              <Link to="/products" className="text-sm text-primary font-medium hover:underline">
+                View all
+              </Link>
+            }
+          />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            {featuredProducts.map((product) => (
+              <Link
+                key={product.id}
+                to={`/products/${product.id}`}
+                className="group rounded-lg border border-border-col p-3 hover:shadow-card-hover transition-shadow"
+              >
+                <div className="aspect-square bg-bg-light rounded mb-3 flex items-center justify-center overflow-hidden">
+                  <img
+                    src={img(product.image)}
+                    alt={product.name}
+                    className="object-contain w-full h-full p-2 group-hover:scale-105 transition-transform"
+                    onError={(e) => { e.target.src = `https://placehold.co/220x220/f7f7f7/999?text=Image` }}
+                  />
+                </div>
+                <p className="text-xs text-text-muted uppercase tracking-wide">{product.category}</p>
+                <p className="text-sm font-medium text-text-primary mt-1 line-clamp-2">{product.name}</p>
+                <p className="text-sm font-semibold text-primary mt-2">{formatPrice(product.price)}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
 
         {/* ── Recommended Items ── */}
         <section>

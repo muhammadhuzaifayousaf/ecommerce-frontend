@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { LayoutGrid, List, SlidersHorizontal, ChevronLeft, ChevronRight, X } from 'lucide-react'
 import Navbar from '../components/Navbar'
@@ -64,15 +64,15 @@ function Pagination({ currentPage, totalPages, onChange }) {
 
 // ── Product Listing Page ───────────────────────────────────────────────────
 export default function ProductListingPage() {
-  const [searchParams] = useSearchParams()
-  const query = searchParams.get('q') || ''
-
   const [viewMode, setViewMode]           = useState('grid')   // 'grid' | 'list'
   const [sortBy, setSortBy]               = useState('featured')
   const [verifiedOnly, setVerifiedOnly]   = useState(false)
   const [wishlistIds, setWishlistIds]     = useState([])
   const [currentPage, setCurrentPage]     = useState(1)
   const [showMobileFilter, setShowMobileFilter] = useState(false)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '')
+  const [selectedCategory, setSelectedCategory] = useState('All')
 
   const [filters, setFilters] = useState({
     brands: [],
@@ -84,14 +84,23 @@ export default function ProductListingPage() {
   })
 
   const ITEMS_PER_PAGE = 9
+  const categories = ['All', ...new Set(products.map((product) => product.category))]
+
+  useEffect(() => {
+    const query = searchParams.get('q') || ''
+    setSearchTerm(query)
+  }, [searchParams])
 
   // ── Apply filters ──
   const filtered = useMemo(() => {
     let list = [...products]
 
-    if (query) {
-      const q = query.toLowerCase()
-      list = list.filter((p) => p.name.toLowerCase().includes(q))
+    if (searchTerm.trim()) {
+      const q = searchTerm.toLowerCase().trim()
+      list = list.filter((p) => p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q))
+    }
+    if (selectedCategory !== 'All') {
+      list = list.filter((p) => p.category === selectedCategory)
     }
     if (filters.brands.length)
       list = list.filter((p) => filters.brands.includes(p.brand))
@@ -112,7 +121,7 @@ export default function ProductListingPage() {
     }
 
     return list
-  }, [query, filters, sortBy, verifiedOnly])
+  }, [searchTerm, selectedCategory, filters, sortBy, verifiedOnly])
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / ITEMS_PER_PAGE))
   const paginated  = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE)
@@ -131,8 +140,12 @@ export default function ProductListingPage() {
     setFilters((prev) => ({ ...prev, [key]: prev[key].filter((v) => v !== val) }))
   }
 
-  const clearAll = () =>
+  const clearAll = () => {
+    setSearchTerm('')
+    setSearchParams({})
+    setSelectedCategory('All')
     setFilters({ brands: [], features: [], categories: [], ratings: [], condition: 'Any', price: { min: 0, max: 999999 } })
+  }
 
   return (
     <div className="min-h-screen bg-bg-light">
@@ -169,8 +182,34 @@ export default function ProductListingPage() {
           {/* ── Main content ── */}
           <div className="flex-1 min-w-0">
             {/* Toolbar */}
-            <div className="bg-white rounded border border-border-col p-3 flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
-              <div className="flex items-center gap-3 flex-1">
+            <div className="bg-white rounded border border-border-col p-3 flex flex-col gap-3 mb-4">
+              <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(event) => {
+                    const value = event.target.value
+                    setSearchTerm(value)
+                    setSearchParams({ q: value })
+                    setCurrentPage(1)
+                  }}
+                  placeholder="Search products"
+                  className="flex-1 border border-border-col rounded px-3 py-2 text-sm outline-none focus:border-primary"
+                />
+                <select
+                  value={selectedCategory}
+                  onChange={(event) => {
+                    setSelectedCategory(event.target.value)
+                    setCurrentPage(1)
+                  }}
+                  className="border border-border-col rounded px-3 py-2 text-sm bg-white outline-none"
+                >
+                  {categories.map((category) => (
+                    <option key={category} value={category}>{category}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex items-center gap-3 flex-wrap">
                 <span className="text-sm text-text-muted">
                   <strong className="text-text-primary">12,911</strong> items in{' '}
                   <strong className="text-text-primary">Mobile accessory</strong>

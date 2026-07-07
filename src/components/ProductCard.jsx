@@ -54,6 +54,12 @@ function GridCard({ product, onWishlist, wishlisted }) {
           </p>
         </div>
       </Link>
+      <button
+        type="button"
+        className="mx-3 mb-3 w-auto rounded bg-primary px-3 py-2 text-sm font-semibold text-white hover:bg-primary/90"
+      >
+        Add to Cart
+      </button>
     </div>
   )
 }
@@ -110,6 +116,12 @@ function ListCard({ product, onWishlist, wishlisted }) {
         <Link to={`/products/${product.id}`}>
           <span className="text-sm text-primary hover:underline mt-1 inline-block">View details</span>
         </Link>
+        <button
+          type="button"
+          className="mt-3 rounded bg-primary px-3 py-2 text-sm font-semibold text-white hover:bg-primary/90"
+        >
+          Add to Cart
+        </button>
       </div>
 
       {/* Right: wishlist */}
