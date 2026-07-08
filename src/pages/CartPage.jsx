@@ -5,7 +5,7 @@ import CartItem from "../components/CartItem";
 import CartSummary from "../components/CartSummary";
 import ServiceFeatures from "../components/ServiceFeatures";
 import SavedProducts from "../components/SavedProducts";
-import DiscountBanner from "../components/DiscountBanner";
+import PromoBanner from "../components/PromoBanner";
 
 import cartItems from "../data/cartData";
 
@@ -59,7 +59,7 @@ export default function CartPage() {
 
           <SavedProducts />
 
-          <DiscountBanner />
+          <PromoBanner />
 
         </div>
 
