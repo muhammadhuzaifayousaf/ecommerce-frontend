@@ -272,22 +272,22 @@ export default function HomePage() {
   {/* Blue Overlay */}
   <div className="absolute inset-0 bg-gradient-to-r from-[#2C7CF1]/90 via-[#2C7CF1]/75 to-[#00B5FF]/30" />
 
-  <div className="relative grid lg:grid-cols-2 gap-6 p-8">
+  <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8">
 
     {/* Left */}
     <div className="text-white flex flex-col justify-center">
-      <h2 className="text-4xl font-bold leading-tight max-w-md">
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight">
         An easy way to send requests to all suppliers
       </h2>
 
-      <p className="mt-5 max-w-md text-white/90 leading-7">
+      <p className="mt-4 sm:mt-5 text-sm sm:text-base text-white/90 leading-6 sm:leading-7">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit,
         sed do eiusmod tempor incididunt.
       </p>
     </div>
 
     {/* Right Card */}
-    <div className="bg-white rounded-xl shadow-2xl p-6 max-w-lg ml-auto w-full">
+    <div className="bg-white rounded-xl shadow-2xl p-4 sm:p-6 w-full">
 
       <h3 className="font-bold text-xl mb-4">
         Send quote to suppliers
@@ -304,14 +304,14 @@ export default function HomePage() {
         className="w-full border rounded-lg px-4 py-3 mb-4 resize-none outline-none focus:ring-2 focus:ring-blue-500"
       />
 
-      <div className="flex gap-3 mb-5">
+      <div className="flex gap-2 sm:gap-3 mb-5">
 
         <input
           placeholder="Quantity"
-          className="flex-1 border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 border rounded-lg px-3 sm:px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-500"
         />
 
-        <select className="w-28 border rounded-lg px-3 py-3 bg-white outline-none focus:ring-2 focus:ring-blue-500">
+        <select className="sm:w-28 px-2 sm:px-3 py-3 border rounded-lg bg-white text-sm outline-none focus:ring-2 focus:ring-blue-500">
           <option>Pcs</option>
           <option>Kg</option>
           <option>Box</option>
