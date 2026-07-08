@@ -131,16 +131,34 @@
   },
   {
     "id": 11,
-    "name": "Halo Smartphone X",
-    "price": 749.0,
+    "name": "Apple iPhone 12 Pro 256GB Blue",
+    "price": 298.0,
     "image": "phone1.jpg",
-    "description": "A premium smartphone with a bright display, quad camera system, and all-day battery.",
+    "description": "Flagship iPhone with triple camera system. Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     "category": "Electronics",
-    "stock": 9,
+    "stock": 25,
     "rating": 4.8,
-    "brand": "Halo",
-    "seller": "Mobile Hub",
-    "originalPrice": 899.0
+    "reviews": 32,
+    "orders": 154,
+    "brand": "Apple",
+    "seller": "Guanjoi Trading LLC",
+    "originalPrice": 128.0,
+    "specs": {
+      "Model": "iPhone 12 Pro",
+      "Storage": "256GB",
+      "Color": "Blue",
+      "Type": "Classic smartphone",
+      "Material": "Aluminum and glass",
+      "Design": "Modern premium",
+      "Customization": "Customized logo and design custom packages",
+      "Protection": "Refund Policy",
+      "Warranty": "2 years full warranty"
+    },
+    "features": [
+      "5G capable",
+      "ProMotion display",
+      "Night mode"
+    ]
   },
   {
     "id": 12,
