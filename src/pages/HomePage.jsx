@@ -35,6 +35,7 @@ function SectionHeader({ title, subtitle, action }) {
 // ── Home Page ─────────────────────────────────────────────────────────────────
 export default function HomePage() {
   const [cartCount] = useState(initialCartItems.length)
+  const [featuredProducts] = useState(products.slice(0, 6))
 
   return (
     <div className="min-h-screen bg-bg-light">
@@ -120,6 +121,40 @@ export default function HomePage() {
                 Send quotes with<br />supplier preferences
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ── Featured products ── */}
+        <section className="bg-white rounded border border-border-col p-5">
+          <SectionHeader
+            title="Featured products"
+            subtitle="Hand-picked products from our catalog"
+            action={
+              <Link to="/products" className="text-primary text-sm font-medium hover:underline">
+                View all products
+              </Link>
+            }
+          />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            {featuredProducts.map((product) => (
+              <Link
+                key={product.id}
+                to={`/products/${product.id}`}
+                className="group bg-bg-light rounded-lg overflow-hidden p-3 text-center hover:shadow-card-hover transition-shadow"
+              >
+                <div className="aspect-square bg-white rounded-lg flex items-center justify-center mb-3 overflow-hidden">
+                  <img
+                    src={img(product.image)}
+                    alt={product.name}
+                    className="object-contain w-full h-full p-2 group-hover:scale-105 transition-transform"
+                    onError={(e) => { e.target.src = `https://placehold.co/200x200/f7f7f7/999?text=Image` }}
+                  />
+                </div>
+                <p className="text-xs text-text-muted mb-1 line-clamp-2">{product.category}</p>
+                <p className="font-semibold text-sm text-text-primary">{product.name}</p>
+                <p className="text-sm text-text-secondary mt-1">{formatPrice(product.price)}</p>
+              </Link>
+            ))}
           </div>
         </section>
 
