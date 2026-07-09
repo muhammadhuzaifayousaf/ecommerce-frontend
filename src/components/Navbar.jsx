@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import {
   ShoppingCart, User, MessageSquare, Package,
   Search, ChevronDown, Menu, X, ShoppingBag,
+  Home, List, Heart, FileText, Globe,
 } from 'lucide-react'
 import { navCategories } from '../data/products'
 import ReactCountryFlag from "react-country-flag";
@@ -186,20 +187,107 @@ export default function Navbar({ cartCount = 0 }) {
 
       {/* ── Mobile drawer menu ── */}
       {mobileOpen && (
-        <div className="md:hidden bg-white border-t border-border-col px-4 py-3 space-y-3 shadow-lg">
-          {navCategories.map((cat) => (
-            <Link
-              key={cat}
-              to="/products"
-              onClick={() => setMobileOpen(false)}
-              className="block text-sm text-text-secondary hover:text-primary py-1 border-b border-border-col last:border-0"
-            >
-              {cat}
-            </Link>
-          ))}
-          <Link to="/cart" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 text-sm text-text-secondary py-1">
-            <ShoppingCart size={16} /> Cart ({cartCount})
-          </Link>
+        <div className="md:hidden fixed inset-0 z-50 flex">
+          <div className="w-72 max-w-full bg-white shadow-xl overflow-y-auto">
+            <div className="px-4 py-4 border-b border-border-col">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                    <User size={20} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-text-primary">Sign in</p>
+                    <p className="text-sm text-text-muted">Register</p>
+                  </div>
+                </div>
+                <button onClick={() => setMobileOpen(false)} className="text-text-secondary">
+                  <X size={22} />
+                </button>
+              </div>
+            </div>
+
+            <div className="px-4 py-4 space-y-2">
+              <Link
+                to="/"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-text-secondary hover:bg-bg-light hover:text-primary"
+              >
+                <Home size={18} />
+                Home
+              </Link>
+              <Link
+                to="/products"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-text-secondary hover:bg-bg-light hover:text-primary"
+              >
+                <List size={18} />
+                Categories
+              </Link>
+              <Link
+                to="/products"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-text-secondary hover:bg-bg-light hover:text-primary"
+              >
+                <Heart size={18} />
+                Favorites
+              </Link>
+              <Link
+                to="/cart"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-text-secondary hover:bg-bg-light hover:text-primary"
+              >
+                <Package size={18} />
+                My orders
+              </Link>
+
+              <div className="flex items-center gap-2 rounded-lg px-3 py-3 text-sm text-text-secondary">
+                <Globe size={16} />
+                <span>English | USD</span>
+              </div>
+
+              <Link
+                to="/"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-text-secondary hover:bg-bg-light hover:text-primary"
+              >
+                <MessageSquare size={18} />
+                Contact us
+              </Link>
+              <Link
+                to="/"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-text-secondary hover:bg-bg-light hover:text-primary"
+              >
+                <FileText size={18} />
+                About
+              </Link>
+            </div>
+
+            <div className="px-4 py-4 border-t border-border-col text-sm text-text-muted space-y-2">
+              <Link
+                to="/"
+                onClick={() => setMobileOpen(false)}
+                className="block hover:text-primary"
+              >
+                User agreement
+              </Link>
+              <Link
+                to="/"
+                onClick={() => setMobileOpen(false)}
+                className="block hover:text-primary"
+              >
+                Partnership
+              </Link>
+              <Link
+                to="/"
+                onClick={() => setMobileOpen(false)}
+                className="block hover:text-primary"
+              >
+                Privacy policy
+              </Link>
+            </div>
+          </div>
+          <div className="flex-1 bg-black/40" onClick={() => setMobileOpen(false)} />
         </div>
       )}
     </header>
