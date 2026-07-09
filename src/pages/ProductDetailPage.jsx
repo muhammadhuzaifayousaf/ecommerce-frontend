@@ -7,6 +7,7 @@ import StarRating from '../components/StarRating'
 import PromoBanner from '../components/PromoBanner'
 import { products, initialCartItems } from '../data/products'
 import { img, formatPrice } from '../utils/helpers'
+import Flag from 'react-world-flags'
 
 // Price tier table from the Figma design
 const priceTiers = [
@@ -169,13 +170,16 @@ export default function ProductDetailPage() {
                 G
               </div>
               <div>
+                <p className="text-xs uppercase tracking-wide text-text-muted">Supplier</p>
                 <p className="font-semibold text-text-primary text-sm">Guanjoi Trading LLC</p>
-                <div className="flex items-center gap-1 text-sm text-text-muted mt-1">
-                  🇩🇪 <span>Germany, Berlin</span>
-                </div>
               </div>
             </div>
+            
             <div className="space-y-1.5 mb-4 text-sm">
+              <div className="flex items-center gap-2 text-sm text-text-secondary">
+              <Flag code="DE" style={{ width: 16, height: 10, borderRadius: 1, objectFit: 'cover' }} />
+              <span>Germany, Berlin</span>
+            </div>
               <div className="flex items-center gap-2 text-text-secondary">
                 <Shield size={14} className="text-success" /> Verified Seller
               </div>

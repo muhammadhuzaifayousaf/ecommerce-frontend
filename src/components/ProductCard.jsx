@@ -54,12 +54,14 @@ function GridCard({ product, onWishlist, wishlisted }) {
           </p>
         </div>
       </Link>
-      <button
-        type="button"
-        className="mx-3 mb-3 w-auto rounded bg-primary px-3 py-2 text-sm font-semibold text-white hover:bg-primary/90"
-      >
-        Add to Cart
-      </button>
+      <div className="px-3 pb-3 pt-1">
+        <button
+          type="button"
+          className="w-full rounded bg-primary px-3 py-3 text-sm font-semibold text-white hover:bg-primary/90 transition"
+        >
+          Add to Cart
+        </button>
+      </div>
     </div>
   )
 }
@@ -87,7 +89,7 @@ function ListCard({ product, onWishlist, wishlisted }) {
         </Link>
 
         {/* Price + rating */}
-        <div className="flex items-center gap-3 mt-1">
+        <div className="flex flex-wrap items-center gap-3 mt-1">
           <span className="font-semibold text-lg text-text-primary">
             {formatPrice(product.price)}
           </span>
@@ -98,7 +100,7 @@ function ListCard({ product, onWishlist, wishlisted }) {
           )}
         </div>
 
-        <div className="flex items-center gap-2 mt-1">
+        <div className="flex flex-wrap items-center gap-2 mt-1">
           <StarRating rating={product.rating} />
           <span className="text-sm text-text-muted">{product.rating}</span>
           <span className="text-text-muted">•</span>
@@ -113,15 +115,17 @@ function ListCard({ product, onWishlist, wishlisted }) {
           {product.description}
         </p>
 
-        <Link to={`/products/${product.id}`}>
-          <span className="text-sm text-primary hover:underline mt-1 inline-block">View details</span>
-        </Link>
-        <button
-          type="button"
-          className="mt-3 rounded bg-primary px-3 py-2 text-sm font-semibold text-white hover:bg-primary/90"
-        >
-          Add to Cart
-        </button>
+        <div className="mt-3 flex flex-col gap-3">
+          <Link to={`/products/${product.id}`}>
+            <span className="text-sm text-primary hover:underline">View details</span>
+          </Link>
+          <button
+            type="button"
+            className="w-full rounded bg-primary px-3 py-3 text-sm font-semibold text-white hover:bg-primary/90 transition"
+          >
+            Add to Cart
+          </button>
+        </div>
       </div>
 
       {/* Right: wishlist */}

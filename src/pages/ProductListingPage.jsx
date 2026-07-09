@@ -107,7 +107,7 @@ export default function ProductListingPage() {
     if (filters.categories.length)
       list = list.filter((p) => filters.categories.includes(p.category))
     if (verifiedOnly)
-      list = list.filter((p) => p.seller.includes('Artel'))
+      list = list.filter((p) => p.verified)
 
     list = list.filter(
       (p) => p.price >= filters.price.min && p.price <= filters.price.max

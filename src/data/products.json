@@ -9,7 +9,8 @@
     "stock": 24,
     "rating": 4.8,
     "brand": "Aurora",
-    "seller": "Northwind Tech",
+    "seller": "Artel Market",
+    "verified": true,
     "originalPrice": 159.99
   },
   {
@@ -142,6 +143,7 @@
     "orders": 154,
     "brand": "Apple",
     "seller": "Guanjoi Trading LLC",
+    "verified": true,
     "originalPrice": 128.0,
     "specs": {
       "Model": "iPhone 12 Pro",
