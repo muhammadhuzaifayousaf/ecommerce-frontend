@@ -14,25 +14,39 @@ A modern and fully responsive **eCommerce web application** built with **React**
 
 ## 📖 Project Documentation
 
-📄 **https://drive.google.com/file/d/1g6lAi9o9RGVqysEF54cbjk7uEjh9v9Pd/**
+### Week 1 Documentation
+- 📄 **Week 1 Report / Assignment:** https://drive.google.com/file/d/1g6lAi9o9RGVqysEF54cbjk7uEjh9v9Pd/
+- Includes the initial UI structure, layout planning, and first phase of the eCommerce frontend implementation.
+
+### Week 2 Documentation
+- 📄 **Week 2 Report / Assignment:** https://drive.google.com/file/d/1zqtx4suPVpXScFWPUOUaI1xB3uRvlZ8L/
+- Covers dynamic product data integration, featured products, product listing filters, product detail routing, and responsive UI improvements.
 
 ## ✨ Features
 
-* Modern and responsive eCommerce user interface
-* Responsive navigation bar with category dropdowns
-* Hero banner with promotional sections
-* Product listing page with multiple products
-* Product details page with image gallery
-* Shopping cart with quantity management
-* Save for later (wishlist) functionality
-* Product search and category filtering
-* Deals and offers section with live countdown timer
-* Home & Outdoor and Consumer Electronics sections
-* Supplier inquiry banner with contact form
-* Regional suppliers section with country flags
-* Mobile friendly design using Tailwind CSS
-* Client side routing with React Router
-* Reusable React components for better maintainability
+### Core App Experience
+- Modern and responsive eCommerce user interface
+- Responsive navigation bar with category dropdowns
+- Hero banner with promotional sections
+- Product listing page with multiple products
+- Product details page with image gallery
+- Shopping cart with quantity management
+- Save for later (wishlist) functionality
+
+### Week 2 Enhancements
+- Product search and category filtering
+- Verified-only product filtering
+- Featured products section on the Home page
+- Dynamic product cards driven from local JSON data
+- Responsive mobile menu improvements
+- Improved routing and navigation behavior
+- Deals and offers section with live countdown timer
+- Home & Outdoor and Consumer Electronics sections
+- Supplier inquiry banner with contact form
+- Regional suppliers section with country flags
+- Mobile friendly design using Tailwind CSS
+- Client side routing with React Router
+- Reusable React components for better maintainability
 
 ## 📄 Pages
 
