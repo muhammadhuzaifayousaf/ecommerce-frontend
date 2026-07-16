@@ -6,6 +6,7 @@ import {
   Home, List, Heart, FileText, Globe,
 } from 'lucide-react'
 import { navCategories } from '../data/products'
+import { useCart } from '../context/CartContext'
 import ReactCountryFlag from "react-country-flag";
 
 const getFlagEmoji = (countryCode) =>
@@ -81,8 +82,9 @@ function IconBtn({ icon: Icon, label, to, badge }) {
 }
 
 // ── Navbar ──────────────────────────────────────────────────────────────────
-export default function Navbar({ cartCount = 0 }) {
+export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { totalItems } = useCart()
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -109,16 +111,16 @@ export default function Navbar({ cartCount = 0 }) {
           <IconBtn icon={User}          label="Profile"  to="/"     />
           <IconBtn icon={MessageSquare} label="Message"  to="/"     />
           <IconBtn icon={Package}       label="Orders"   to="/"     />
-          <IconBtn icon={ShoppingCart}  label="My cart"  to="/cart"  badge={cartCount} />
+          <IconBtn icon={ShoppingCart}  label="My cart"  to="/cart"  badge={totalItems} />
         </nav>
 
         {/* Mobile: cart icon only */}
         <div className="flex md:hidden items-center gap-3 ml-auto">
           <Link to="/cart" className="relative text-text-secondary">
             <ShoppingCart size={22} />
-            {cartCount > 0 && (
+            {totalItems > 0 && (
               <span className="absolute -top-1 -right-1 bg-danger text-white text-[9px] rounded-full w-4 h-4 flex items-center justify-center font-bold">
-                {cartCount}
+                {totalItems}
               </span>
             )}
           </Link>

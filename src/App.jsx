@@ -1,4 +1,5 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { CartProvider } from "./context/CartContext";
 
 import HomePage from "./pages/HomePage";
 import ProductListingPage from "./pages/ProductListingPage";
@@ -15,18 +16,20 @@ function NotFound() {
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
+    <CartProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
 
-        <Route path="/products" element={<ProductListingPage />} />
+          <Route path="/products" element={<ProductListingPage />} />
 
-        <Route path="/products/:id" element={<ProductDetailPage />} />
+          <Route path="/products/:id" element={<ProductDetailPage />} />
 
-        <Route path="/cart" element={<CartPage />} />
+          <Route path="/cart" element={<CartPage />} />
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </CartProvider>
   );
 }

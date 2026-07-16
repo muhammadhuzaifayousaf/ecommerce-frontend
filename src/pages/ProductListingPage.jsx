@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import FilterSidebar from '../components/FilterSidebar'
 import ProductCard from '../components/ProductCard'
-import { products, initialCartItems } from '../data/products'
+import { products } from '../data/products'
 
 // ── Active filter chip ─────────────────────────────────────────────────────
 function FilterChip({ label, onRemove }) {
@@ -149,7 +149,7 @@ export default function ProductListingPage() {
 
   return (
     <div className="min-h-screen bg-bg-light">
-      <Navbar cartCount={initialCartItems.length} />
+      <Navbar />
 
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-4 py-3 text-sm text-text-muted">

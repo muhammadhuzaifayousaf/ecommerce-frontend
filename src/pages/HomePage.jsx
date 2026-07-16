@@ -7,7 +7,7 @@ import CountdownTimer from '../components/CountdownTimer'
 import {
   heroCategories, dealProducts, homeOutdoorCategories,
   electronicsCategories, recommendedProducts, suppliersRegion,
-  initialCartItems, products,
+  products,
 } from '../data/products'
 import { img, formatPrice } from '../utils/helpers'
 import Flag from "react-world-flags";
@@ -34,12 +34,11 @@ function SectionHeader({ title, subtitle, action }) {
 
 // ── Home Page ─────────────────────────────────────────────────────────────────
 export default function HomePage() {
-  const [cartCount] = useState(initialCartItems.length)
   const [featuredProducts] = useState(products.slice(0, 6))
 
   return (
     <div className="min-h-screen bg-bg-light">
-      <Navbar cartCount={cartCount} />
+      <Navbar />
 
       <main className="max-w-7xl mx-auto px-4 py-6 space-y-8">
 

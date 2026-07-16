@@ -2,9 +2,10 @@ import { Heart } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import StarRating from './StarRating'
 import { img, formatPrice } from '../utils/helpers'
+import { useCart } from '../context/CartContext'
 
 // ── Grid Card ──────────────────────────────────────────────────────────────
-function GridCard({ product, onWishlist, wishlisted }) {
+function GridCard({ product, onWishlist, wishlisted, onAddToCart }) {
   return (
     <div className="product-card overflow-hidden group relative">
       {/* Wishlist button */}
@@ -57,6 +58,7 @@ function GridCard({ product, onWishlist, wishlisted }) {
       <div className="px-3 pb-3 pt-1">
         <button
           type="button"
+          onClick={(e) => { e.preventDefault(); onAddToCart(product) }}
           className="w-full rounded bg-primary px-3 py-3 text-sm font-semibold text-white hover:bg-primary/90 transition"
         >
           Add to Cart
@@ -67,7 +69,7 @@ function GridCard({ product, onWishlist, wishlisted }) {
 }
 
 // ── List Card ──────────────────────────────────────────────────────────────
-function ListCard({ product, onWishlist, wishlisted }) {
+function ListCard({ product, onWishlist, wishlisted, onAddToCart }) {
   return (
     <div className="product-card p-4 flex gap-4">
       <Link to={`/products/${product.id}`} className="flex-shrink-0">
@@ -121,6 +123,7 @@ function ListCard({ product, onWishlist, wishlisted }) {
           </Link>
           <button
             type="button"
+            onClick={() => onAddToCart(product)}
             className="w-full rounded bg-primary px-3 py-3 text-sm font-semibold text-white hover:bg-primary/90 transition"
           >
             Add to Cart
@@ -146,8 +149,19 @@ function ListCard({ product, onWishlist, wishlisted }) {
 // ── Main export ────────────────────────────────────────────────────────────
 export default function ProductCard({ product, mode = 'grid', wishlistIds = [], onWishlist = () => {} }) {
   const wishlisted = wishlistIds.includes(product.id)
+  const { addItem } = useCart()
+
+  const handleAddToCart = (p) => {
+    addItem({
+      id: p.id,
+      name: p.name,
+      price: p.price,
+      image: img(p.image),
+      seller: p.seller || 'ShopHub',
+    })
+  }
 
   return mode === 'grid'
-    ? <GridCard product={product} onWishlist={onWishlist} wishlisted={wishlisted} />
-    : <ListCard product={product} onWishlist={onWishlist} wishlisted={wishlisted} />
+    ? <GridCard product={product} onWishlist={onWishlist} wishlisted={wishlisted} onAddToCart={handleAddToCart} />
+    : <ListCard product={product} onWishlist={onWishlist} wishlisted={wishlisted} onAddToCart={handleAddToCart} />
 }

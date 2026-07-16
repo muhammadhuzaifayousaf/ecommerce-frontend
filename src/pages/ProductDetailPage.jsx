@@ -5,8 +5,9 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import StarRating from '../components/StarRating'
 import PromoBanner from '../components/PromoBanner'
-import { products, initialCartItems } from '../data/products'
+import { products } from '../data/products'
 import { img, formatPrice } from '../utils/helpers'
+import { useCart } from '../context/CartContext'
 import Flag from 'react-world-flags'
 
 // Price tier table from the Figma design
@@ -29,6 +30,7 @@ export default function ProductDetailPage() {
   const { id }     = useParams()
   const navigate   = useNavigate()
   const product    = products.find((p) => p.id === Number(id)) || products[0]
+  const { addItem } = useCart()
 
   const [activeImg,     setActiveImg]     = useState(0)
   const [activeTab,     setActiveTab]     = useState('description')
@@ -42,7 +44,7 @@ export default function ProductDetailPage() {
 
   return (
     <div className="min-h-screen bg-bg-light">
-      <Navbar cartCount={initialCartItems.length} />
+      <Navbar />
 
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-1 text-sm text-text-muted flex-wrap">
@@ -161,6 +163,36 @@ export default function ProductDetailPage() {
                 ))}
               </tbody>
             </table>
+
+            {/* Quantity + Add to Cart */}
+            <div className="flex items-center gap-3 mt-4">
+              <label className="text-sm text-text-secondary">Quantity:</label>
+              <select
+                value={qty}
+                onChange={(e) => setQty(Number(e.target.value))}
+                className="border border-border-col rounded px-3 py-2 text-sm outline-none focus:border-primary"
+              >
+                {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
+                  <option key={n} value={n}>{n}</option>
+                ))}
+              </select>
+              <button
+                onClick={() => {
+                  addItem({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: img(product.image),
+                    seller: product.seller || 'ShopHub',
+                  }, qty)
+                  setQty(1)
+                }}
+                className="flex-1 bg-primary text-white py-2.5 rounded text-sm font-semibold hover:bg-primary-dark transition-colors flex items-center justify-center gap-2"
+              >
+                <ShoppingCart size={16} />
+                Add to Cart
+              </button>
+            </div>
           </div>
 
           {/* Supplier card */}
