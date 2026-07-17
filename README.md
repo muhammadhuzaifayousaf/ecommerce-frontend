@@ -1,6 +1,6 @@
 # 🛒 React eCommerce Frontend
 
-A modern and fully responsive **eCommerce web application** built with **React**, **Vite**, and **Tailwind CSS**. The project recreates a professional online shopping experience with a clean UI, reusable components, product browsing, shopping cart functionality, and responsive layouts optimized for desktop, tablet, and mobile devices.
+A modern and fully responsive **eCommerce web application** built with **React**, **Vite**, and **Tailwind CSS**. The project recreates a professional online shopping experience with a clean UI, reusable components, product browsing, a fully functional shopping cart with global state management and localStorage persistence, and responsive layouts optimized for desktop, tablet, and mobile devices.
 
 <p align="center">
   <a href="https://muhammadhuzaifayousaf.github.io/ecommerce-frontend/">
@@ -21,6 +21,10 @@ A modern and fully responsive **eCommerce web application** built with **React**
 ### Week 2 Documentation
 - 📄 **Week 2 Report / Assignment:** https://drive.google.com/file/d/1zqtx4suPVpXScFWPUOUaI1xB3uRvlZ8L/
 - Covers dynamic product data integration, featured products, product listing filters, product detail routing, and responsive UI improvements.
+
+### Week 3 Documentation
+- 📄 **Week 3 Report / Assignment:** https://drive.google.com/file/d/1O547JKEvQBWn6v3IIdzf4HEgi68ZFF-I/
+- Covers cart functionality, React Context API state management, localStorage persistence, interactive cart page with quantity controls, and dynamic totals.
 
 ## ✨ Features
 
@@ -48,6 +52,19 @@ A modern and fully responsive **eCommerce web application** built with **React**
 - Client side routing with React Router
 - Reusable React components for better maintainability
 
+### Week 3 Enhancements
+- Global cart state management using React Context API
+- Functional Add to Cart buttons on Product Listing and Product Detail pages
+- Duplicate prevention — same product increases quantity instead of adding duplicates
+- Cart Page with quantity increment (+) and decrement (-) controls
+- Remove button to delete items from cart
+- Remove All button to clear the entire cart
+- Running total price that updates dynamically (subtotal, discount, tax, total)
+- Empty cart state with friendly message and "Continue Shopping" link
+- Navbar cart badge showing real item count across all pages
+- localStorage persistence — cart data survives page refreshes
+- Fully responsive cart UI on mobile and desktop
+
 ## 📄 Pages
 
 | Page | Route |
@@ -60,11 +77,13 @@ A modern and fully responsive **eCommerce web application** built with **React**
 ## 🛠️ Tech Stack
 
 * **React 18**
+* **React Context API**
 * **Vite**
 * **Tailwind CSS**
 * **React Router DOM**
 * **Lucide React**
 * **React World Flags**
+* **localStorage**
 * **GitHub Pages**
 
 ## ⚙️ Installation
